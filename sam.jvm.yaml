@@ -1,0 +1,35 @@
+  AWSTemplateFormatVersion: '2010-09-09'
+  Transform: AWS::Serverless-2016-10-31
+  Description: AWS Serverless Quarkus HTTP - quarkus-serverless-http-1.0-SNAPSHOT
+  Globals:
+    Api:
+      EndpointConfiguration: REGIONAL
+      BinaryMediaTypes:
+        - "*/*"
+
+  Resources:
+    QuarkusServerlessHttp:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+        Runtime: java17
+        CodeUri: target/function.zip
+        MemorySize: 512
+        Policies: AWSLambdaBasicExecutionRole
+        Timeout: 15
+        Environment:
+          Variables:
+            OIDC_AUTH_SERVER_URL: !Sub "{{resolve:ssm:/hello-world-quarkus/OIDC_AUTH_SERVER_URL}}"
+            OIDC_CLIENT_ID: !Sub "{{resolve:ssm:/hello-world-quarkus/OIDC_CLIENT_ID}}"
+            COGNITO_USER_POOL_ID: !Sub "{{resolve:ssm:/hello-world-quarkus/COGNITO_USER_POOL_ID}}"
+            JAVA_TOOL_OPTIONS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+        Events:
+          HttpApiEvent:
+            Type: HttpApi
+
+  Outputs:
+    QuarkusServerlessHttpApi:
+      Description: URL for application
+      Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/'
+      Export:
+        Name: QuarkusServerlessHttpApi
