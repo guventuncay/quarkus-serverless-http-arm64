@@ -1,4 +1,4 @@
-# Extended official documentation - [aws lambda http](https://quarkus.io/guides/aws-lambda-http)
+# Extended version of official guide - [aws lambda http](https://quarkus.io/guides/aws-lambda-http)
 
 ## Prerequisites
 - JDK 21
