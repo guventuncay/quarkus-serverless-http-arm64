@@ -16,6 +16,9 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
+        if (context.getUserPrincipal() == null) {
+            return "hello anonymous";
+        }
         return "hello %s".formatted(context.getUserPrincipal().getName());
     }
 }
