@@ -13,6 +13,7 @@
       Properties:
         Handler: not.used.in.provided.runtimei
         Runtime: provided.al2023
+        #If you don't want to build for ARM64 comment 'Architectures'
         Architectures:
           - arm64
         CodeUri: target/function.zip
