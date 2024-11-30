@@ -43,3 +43,6 @@ build/
 
 ### Quarkus cli ###
 .quarkus/
+
+### AWS SAM CLI ###
+.aws-sam
