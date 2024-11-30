@@ -3,6 +3,8 @@ package dev.guvenx.user;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
+
 @ApplicationScoped
 public class UserService {
 
@@ -21,7 +23,16 @@ public class UserService {
         return userRepository.getUserById(userId);
     }
 
+    public User updateUser(String userId, User user) {
+        user.setUserId(userId);
+        return userRepository.updateUser(user);
+    }
+
     public void removeUser(String userId) {
         userRepository.deleteUser(userId);
+    }
+
+    public List<User> getAll() {
+        return userRepository.getAllUsers();
     }
 }

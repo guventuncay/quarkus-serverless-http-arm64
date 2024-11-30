@@ -29,6 +29,18 @@ public class UserResource {
         return Response.ok(user).build();
     }
 
+    @GET
+    public Response listUsers() {
+        return Response.ok(userService.getAll()).build();
+    }
+
+    @PUT
+    @Path("/{userId}")
+    public Response updateUser(@PathParam("userId") String userId, User user) {
+        User updateUser = userService.updateUser(userId, user);
+        return Response.ok(updateUser).build();
+    }
+
     @DELETE
     @Path("/{userId}")
     public Response deleteUser(@PathParam("userId") String userId) {

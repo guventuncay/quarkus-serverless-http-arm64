@@ -9,7 +9,6 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserRepository {
@@ -35,11 +34,11 @@ public class UserRepository {
 
     public List<User> getAllUsers() {
         PageIterable<User> results = userTable.scan();
-        return results.items().stream().collect(Collectors.toList());
+        return results.items().stream().toList();
     }
 
-    public void updateUser(User user) {
-        userTable.updateItem(user);
+    public User updateUser(User user) {
+        return userTable.updateItem(user);
     }
 
     public void deleteUser(String userId) {
@@ -52,4 +51,5 @@ public class UserRepository {
     public boolean exists(String userId) {
         return getUserById(userId) != null;
     }
+
 }
