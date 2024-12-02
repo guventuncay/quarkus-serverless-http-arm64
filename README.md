@@ -1,4 +1,4 @@
-# Extended version of official guide - [aws lambda http](https://quarkus.io/guides/aws-lambda-http)
+# Extended official [aws lambda http](https://quarkus.io/guides/aws-lambda-http) guide with **OIDC** and **DynamoDB** 
 
 ## Prerequisites
 - JDK 21
